@@ -76,6 +76,8 @@ for f in $fuzzers; do
   echo =========== FUZZING $f
   ./build/fuzz/$f -max_len=$(max_len $f) -jobs=$J -workers=$J\
     -max_total_time=$MAX_TOTAL_TIME CORPORA/$f boringssl/fuzz/${f}_corpus  >> $L 2>&1
+  ./build/fuzz/$f -max_len=$(max_len $f) -jobs=$J -workers=$J -drill=1\
+    -max_total_time=$MAX_TOTAL_TIME CORPORA/$f boringssl/fuzz/${f}_corpus  >> $L 2>&1
 done
 prefix=pass # TODO
 

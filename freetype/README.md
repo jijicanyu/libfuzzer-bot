@@ -1,4 +1,4 @@
-This page describes an [experimental fuzzer bot](http://107.178.217.50/) for [FreeType](freetype.org)
+This page describes an [experimental fuzzer bot](http://130.211.71.211/) for [FreeType](freetype.org)
 
 # Motivation
 

@@ -49,7 +49,7 @@ max_len() {
   esac
 }
 
-MAX_TOTAL_TIME=600
+MAX_TOTAL_TIME=2
 
 # Make asan less memory-hungry, strip paths, intercept abort(), no lsan.
 export ASAN_OPTIONS=coverage=1:quarantine_size_mb=10:strip_path_prefix=`pwd`/:handle_abort=1:detect_leaks=0
@@ -72,14 +72,19 @@ done
 gsutil -m rsync -r $BUCKET/CORPORA CORPORA
 gsutil -m rsync -r CORPORA $BUCKET/CORPORA
 rm -f *.sancov
+prefix=pass
+
+run_fuzzer() {
+  ./build/fuzz/$1 -max_len=$(max_len $1) -jobs=$J -workers=$J\
+    -max_total_time=$MAX_TOTAL_TIME CORPORA/$1 \
+    boringssl/fuzz/${1}_corpus $2 $3 $4 $5 >> $L 2>&1 || prefix=FAIL
+}
+
 for f in $fuzzers; do
-  echo =========== FUZZING $f
-  ./build/fuzz/$f -max_len=$(max_len $f) -jobs=$J -workers=$J\
-    -max_total_time=$MAX_TOTAL_TIME CORPORA/$f boringssl/fuzz/${f}_corpus  >> $L 2>&1
-  ./build/fuzz/$f -max_len=$(max_len $f) -jobs=$J -workers=$J -drill=1\
-    -max_total_time=$MAX_TOTAL_TIME CORPORA/$f boringssl/fuzz/${f}_corpus  >> $L 2>&1
+  echo =========== FUZZING $f | tee -a $L
+  run_fuzzer $f
+  run_fuzzer $f -drill=1
 done
-prefix=pass # TODO
 
 for f in $fuzzers; do
   echo ================== COVERED FUNCTIONS: $f >> $L

@@ -2,7 +2,7 @@ FROM libfuzzer/base-clang
 
 MAINTAINER aizatsky@google.com
 
-RUN apt-get install -y gnuplot
+RUN apt-get install -y gnuplot5-nox
 
 ONBUILD ADD build.sh /src/scripts/
 

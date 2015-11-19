@@ -1,4 +1,4 @@
-This page describes an experimental fuzzer bot(currently disabled) for [Ninja](https://github.com/martine/ninja).
+This page describes an experimental fuzzer bot (currently disabled) for [Ninja](https://github.com/martine/ninja).
 
 The bot uses [libFuzzer](http://llvm.org/docs/LibFuzzer.html) and
 [AddressSanitizer](http://clang.llvm.org/docs/AddressSanitizer.html) to find existing

@@ -18,4 +18,4 @@ ar ruv libFuzzer.a Fuzzer*.o
 rm -f Fuzzer*.o
 clang   -g -fno-omit-frame-pointer -I ${NAME} -DSQLITE_DEBUG  -O0 $SAN $COV -c $NAME/sqlite3.c                      -o sqlite3_$NAME.o
 clang   -g -fno-omit-frame-pointer -I ${NAME} -DSQLITE_DEBUG  -O2 $SAN $COV -c libfuzzer-bot/sqlite/sqlite_fuzzer.c -o sqlite_fuzzer_$NAME.o
-clang++  -o ${NAME}_sqlite_fuzzer $SAN $COV sqlite_fuzzer_$NAME.o sqlite3_$NAME.o libFuzzer.a
+clang++  -o sqlite_${NAME}_fuzzer $SAN $COV sqlite_fuzzer_$NAME.o sqlite3_$NAME.o libFuzzer.a

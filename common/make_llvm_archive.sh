@@ -31,9 +31,12 @@ build_llvm() {
 
 pack_llvm() {
   tar zcf llvm-inst.tgz -C  /tmp llvm-inst  -v
+  gsutil cp llvm-inst.tgz gs://libfuzzer-bot-binaries/llvm-prebuild
+  rm llvm-inst.tgz
 }
 
 get_llvm
 build_llvm
 pack_llvm
 rm -rf $BUILD_DIR $INSTALL_DIR
+

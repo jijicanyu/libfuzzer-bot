@@ -15,7 +15,7 @@ BUILD_SH=$P/build.sh
 SAN=-fsanitize=bool
 COV=-fsanitize-coverage=edge
 USE_COUNTERS=0
-LIBFUZZER_EXTRA_FLAGS=-dict=afl-1.95b/testcases/_extras/sql.dict
+LIBFUZZER_EXTRA_FLAGS="-dict=afl-1.95b/testcases/_extras/sql.dict -only_ascii=1"
 
 TARGET_NAME=sqlite
 

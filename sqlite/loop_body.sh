@@ -6,13 +6,13 @@ export PATH="$HOME/llvm-inst/bin:$PATH"
 COMMON=$P/../common
 
 MAX_LEN=10000
-MAX_TOTAL_TIME=3600
+MAX_TOTAL_TIME=360
 BUCKET=gs://sql-fuzzing-corpora
 CORPUS=CORPORA/C1
 ARTIFACTS=CORPORA/ARTIFACTS
 BUILD_SH=$P/build.sh
 
-SAN=-fsanitize=bool
+SAN=-fsanitize=address
 COV=-fsanitize-coverage=edge
 USE_COUNTERS=0
 LIBFUZZER_EXTRA_FLAGS="-dict=afl-1.95b/testcases/_extras/sql.dict -only_ascii=1"

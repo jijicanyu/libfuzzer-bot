@@ -2,6 +2,7 @@
 # Copyright 2015 Google Inc. All Rights Reserved.
 # Licensed under the Apache License, Version 2.0 (the "License");
 P=$(cd $(dirname $0) && pwd)
+export PATH="$HOME/llvm-inst/bin:$PATH"
 COMMON=$P/../common
 
 MAX_LEN=10000
@@ -22,8 +23,13 @@ update_trunk() {
   if [ -d sqlite ]; then
     (cd sqlite && fossil update)
   else
+    (
+    rm -rf sqlite
+    mkdir sqlite
+    cd sqlite
     fossil clone https://www.sqlite.org/src sqlite.fossil
     fossil open sqlite.fossil trunk
+    )
   fi
 }
 

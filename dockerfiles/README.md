@@ -11,31 +11,40 @@ development.
 The only requirement is to have docker running on the system.
 Check [https://docs.docker.com/] for docker installation guide.
 
-## Available Projects
-* boringssl
-* freetype2
-* pcre2
+## Available Images
+* libfuzzer/boringssl
+* libfuzzer/freetype2
+* libfuzzer/pcre2
 
-## Running Tests
+## Running Fuzzers
 *Operations with all tests are similar. Boringssl would be used for demonstration.*
+
+Create a directory to hold compilation/run artifacts:
+```
+mdkir ~/tmp/work
+```
 
 To compile everything and run library tests do:
 ```
-docker run libfuzzer/boringssl
+docker run -ti -v ~/tmp/work:/work libfuzzer/boringssl
 ```
 
-Most likely you would like to control tests within terminal. Add `-ti` docker option for that:
+This will:
+- (`-ti`) attach terminal to running process
+- (`-v`) mount `~/tmp/work` host directory to container's `/work`
+- (`libfuzzer/boringssl`) use this image to start new container.
+
+### Benchmarking Fuzzers
+
+Add `benchmark` command to docker run:
+
 ```
-docker run -ti libfuzzer/boringssl
+docker run -ti -v ~/tmp/work:/work libfuzzer/boringssl benchmark
 ```
 
-### Reusing compilation artifacts between runs
-To reuse compilation artifacts bewteen run you should mount a local
-directory into container's `/work` path:
-
-```
-docker run -v /tmp/work:/work libfuzzer/boringssl
-```
+This will run multiple fuzzers in parallel and will produce PDF
+report. By specifying different `FUZZER_OPTIONS` (see next section)
+or making changes to source code you can compare fuzzers performance.
 
 ### Environment variables
 A set of environment variables controls test compilation and execution mode.

@@ -2,7 +2,7 @@
 # Copyright 2015 Google Inc. All Rights Reserved.
 # Licensed under the Apache License, Version 2.0 (the "License");
 
-export PATH="$HOME/llvm-build/bin:$PATH"
+export PATH="$HOME/llvm-inst/bin:$PATH"
 P=$(cd $(dirname $0) && pwd)
 
 mkindex() {
@@ -22,6 +22,7 @@ build_fuzzers() {
   ln -sf $HOME/llvm/lib/Fuzzer .
   for f in Fuzzer/*cpp; do clang++ -std=c++11 -c $f -IFuzzer & done
   wait
+  rm -f libFuzzer.a
   ar q libFuzzer.a *.o
   rm -rf build
   mkdir build

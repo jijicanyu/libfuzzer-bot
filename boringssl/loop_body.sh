@@ -89,7 +89,7 @@ done
 
 for f in $fuzzers; do
   echo ================== NOT COVERED FUNCTIONS: $f >> $L
-  sancov  -not-covered_functions -obj build/fuzz/$f $f.*.sancov |  cat -n >> $L
+  sancov  -not-covered-functions -obj build/fuzz/$f $f.*.sancov |  cat -n >> $L
 done
 
 echo =========== UPDATE WEB PAGE

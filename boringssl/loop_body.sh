@@ -50,7 +50,7 @@ max_len() {
   esac
 }
 
-MAX_TOTAL_TIME=600
+MAX_TOTAL_TIME=60
 
 # Make asan less memory-hungry, strip paths, intercept abort(), no lsan.
 export ASAN_OPTIONS=coverage=1:quarantine_size_mb=10:strip_path_prefix=`pwd`/:handle_abort=1:detect_leaks=0
@@ -84,12 +84,12 @@ run_fuzzer() {
 for f in $fuzzers; do
   echo =========== FUZZING $f | tee -a $L
   run_fuzzer $f
-  run_fuzzer $f -drill=1
+  # run_fuzzer $f -drill=1
 done
 
 for f in $fuzzers; do
-  echo ================== COVERED FUNCTIONS: $f >> $L
-  sancov  -covered_functions -obj build/fuzz/$f $f.*.sancov |  cat -n >> $L
+  echo ================== NOT COVERED FUNCTIONS: $f >> $L
+  sancov  -not-covered_functions -obj build/fuzz/$f $f.*.sancov |  cat -n >> $L
 done
 
 echo =========== UPDATE WEB PAGE

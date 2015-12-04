@@ -1,8 +1,8 @@
 #!/bin/bash
 # Copyright 2015 Google Inc. All Rights Reserved.
 # Licensed under the Apache License, Version 2.0 (the "License");
-BUILD_DIR=/tmp/llvm-build
-INSTALL_DIR=/tmp/llvm-inst
+BUILD_DIR=`pwd`/llvm-build
+INSTALL_DIR=`pwd`/llvm-inst
 
 get_llvm() {
   (
@@ -30,13 +30,11 @@ build_llvm() {
 }
 
 pack_llvm() {
-  tar zcf llvm-inst.tgz -C  /tmp llvm-inst  -v
-  gsutil cp llvm-inst.tgz gs://libfuzzer-bot-binaries/llvm-prebuild
-  rm llvm-inst.tgz
+  tar zcf llvm-inst.tgz llvm-inst  -v
+#  gsutil cp llvm-inst.tgz gs://libfuzzer-bot-binaries/llvm-prebuild
+#  rm llvm-inst.tgz
 }
 
 get_llvm
 build_llvm
 pack_llvm
-rm -rf $BUILD_DIR $INSTALL_DIR
-

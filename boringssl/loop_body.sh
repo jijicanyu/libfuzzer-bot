@@ -90,7 +90,7 @@ done
 for f in $fuzzers; do
   sancov -strip_path_prefix /boringssl/ -not-covered-functions -obj build/fuzz/$f $f.*.sancov > $f.notcov
 done
-echo ================== NOT COVERED FUNCTIONS: $f >> $L
+echo ================== NOT COVERED FUNCTIONS: >> $L
 # Hack!
 grep -Fx -f cert.notcov client.notcov | grep -Fx -f privkey.notcov | grep -Fx -f server.notcov | cat -n >> $L
 

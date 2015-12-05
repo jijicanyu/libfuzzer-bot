@@ -50,7 +50,7 @@ max_len() {
   esac
 }
 
-MAX_TOTAL_TIME=60
+MAX_TOTAL_TIME=6
 
 # Make asan less memory-hungry, strip paths, intercept abort(), no lsan.
 export ASAN_OPTIONS=coverage=1:quarantine_size_mb=10:strip_path_prefix=`pwd`/:handle_abort=1:detect_leaks=1
@@ -88,9 +88,10 @@ for f in $fuzzers; do
 done
 
 for f in $fuzzers; do
-  echo ================== NOT COVERED FUNCTIONS: $f >> $L
-  sancov -strip_path_prefix /boringssl/ -not-covered-functions -obj build/fuzz/$f $f.*.sancov |  cat -n >> $L
+  sancov -strip_path_prefix /boringssl/ -not-covered-functions -obj build/fuzz/$f $f.*.sancov > $f.notcov
 done
+
+echo ================== NOT COVERED FUNCTIONS: $f >> $L
 
 echo =========== UPDATE WEB PAGE
 if [ "$DRY_RUN" != "1" ]; then

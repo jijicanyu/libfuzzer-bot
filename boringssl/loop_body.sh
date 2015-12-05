@@ -53,7 +53,7 @@ max_len() {
 MAX_TOTAL_TIME=60
 
 # Make asan less memory-hungry, strip paths, intercept abort(), no lsan.
-export ASAN_OPTIONS=coverage=1:quarantine_size_mb=10:strip_path_prefix=`pwd`/:handle_abort=1:detect_leaks=0
+export ASAN_OPTIONS=coverage=1:quarantine_size_mb=10:strip_path_prefix=`pwd`/:handle_abort=1:detect_leaks=1
 J=$(grep CPU /proc/cpuinfo | wc -l)
 
 L=$(date +%Y-%m-%d-%H-%M-%S.log)

@@ -89,7 +89,7 @@ done
 
 for f in $fuzzers; do
   echo ================== NOT COVERED FUNCTIONS: $f >> $L
-  sancov -strip-path-prefix /boringssl/ -not-covered-functions -obj build/fuzz/$f $f.*.sancov |  cat -n >> $L
+  sancov -strip_path_prefix /boringssl/ -not-covered-functions -obj build/fuzz/$f $f.*.sancov |  cat -n >> $L
 done
 
 echo =========== UPDATE WEB PAGE

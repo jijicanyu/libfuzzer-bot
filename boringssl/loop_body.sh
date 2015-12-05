@@ -50,7 +50,7 @@ max_len() {
   esac
 }
 
-MAX_TOTAL_TIME=6
+MAX_TOTAL_TIME=600
 
 # Make asan less memory-hungry, strip paths, intercept abort(), no lsan.
 export ASAN_OPTIONS=coverage=1:quarantine_size_mb=10:strip_path_prefix=`pwd`/:handle_abort=1:detect_leaks=1

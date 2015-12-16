@@ -31,7 +31,7 @@ dump_coverage() {
 }
 
 # Make asan less memory-hungry, strip paths, intercept abort().
-export ASAN_OPTIONS=quarantine_size_mb=10:strip_path_prefix=$HOME/:handle_abort=1:coverage=1:$ASAN_OPTIONS
+export ASAN_OPTIONS=quarantine_size_mb=10:strip_path_prefix=$HOME/:handle_abort=1:coverage=1:coverage_pcs=1:$ASAN_OPTIONS
 J=$(grep CPU /proc/cpuinfo | wc -l )
 
 L=$(date +%Y-%m-%d-%H-%M-%S.log)

@@ -20,7 +20,7 @@ LIBFUZZER_EXTRA_FLAGS="-dict=afl-1.95b/testcases/_extras/sql.dict -only_ascii=1"
 TARGET_NAME=sqlite
 
 update_trunk() {
-  rm `find . -size 0`
+  rm -f $(find . -size 0)
   if [ -d sqlite ]; then
     (cd sqlite && fossil update)
   else

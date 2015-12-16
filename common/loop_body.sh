@@ -2,7 +2,7 @@
 # Copyright 2015 Google Inc. All Rights Reserved.
 # Licensed under the Apache License, Version 2.0 (the "License");
 
-export PATH="$HOME/llvm-build/bin:$PATH"
+export PATH="$HOME/llvm-inst/bin:$PATH"
 
 get_fresh_llvm() {
   mkdir -p llvm-prebuild
@@ -29,7 +29,7 @@ dump_coverage() {
 }
 
 # Make asan less memory-hungry, strip paths, intercept abort().
-export ASAN_OPTIONS=quarantine_size_mb=10:strip_path_prefix=$HOME/:handle_abort=1:$ASAN_OPTIONS
+export ASAN_OPTIONS=quarantine_size_mb=10:strip_path_prefix=$HOME/:handle_abort=1:coverage=1:$ASAN_OPTIONS
 J=$(grep CPU /proc/cpuinfo | wc -l )
 
 L=$(date +%Y-%m-%d-%H-%M-%S.log)
@@ -44,10 +44,10 @@ if [ "$DRY_RUN" != "1" ]; then
   (gsutil -m rsync -r $BUCKET/CORPORA CORPORA; gsutil -m rsync -r CORPORA $BUCKET/CORPORA) &
 fi
 $BUILD_SH san_cov $SAN $COV > san_cov_build.log 2>&1 &
-$BUILD_SH func    -fsanitize=shift -fsanitize-coverage=func > func_build.log 2>&1 &
 wait
 
 echo =========== FUZZING
+rm -f *.sancov
 ./${TARGET_NAME}_san_cov_fuzzer \
   -max_len=$MAX_LEN $CORPUS  -artifact_prefix=$ARTIFACTS/ -jobs=$J \
   -workers=$J -max_total_time=$MAX_TOTAL_TIME -use_counters=$USE_COUNTERS $LIBFUZZER_EXTRA_FLAGS > $L 2>&1
@@ -59,9 +59,9 @@ case $exit_code in
     ;;
 esac
 echo =========== DUMP COVERAGE
-rm -f *sancov
-UBSAN_OPTIONS=coverage=1 ./${TARGET_NAME}_func_fuzzer -max_len=$MAX_LEN $CORPUS -runs=0 > func_run.log 2>&1
-dump_coverage ${TARGET_NAME}_func_fuzzer >> $L
+sancov -strip_path_prefix /sancov/ -not-covered-functions -obj ./${TARGET_NAME}_san_cov_fuzzer $f.*.sancov > notcov
+echo ================== NOT COVERED FUNCTIONS: >> $L
+cat notcov >> $L
 echo =========== UPDATE WEB PAGE
 if [ "$DRY_RUN" != "1" ]; then
   mkindex $L

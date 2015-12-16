@@ -4,6 +4,13 @@
 
 export PATH="$HOME/llvm-build/bin:$PATH"
 
+get_fresh_llvm() {
+  mkdir -p llvm-prebuild
+  gsutil rsync gs://libfuzzer-bot-binaries/llvm-prebuild llvm-prebuild
+  rm -rf llvm-inst
+  tar xf llvm-prebuild/llvm-inst.tgz
+}
+
 mkindex() {
   sudo mv $1 /var/www/html/$prefix-$1
   (cd /var/www/html/; sudo $P/../common/mkindex.sh index.html *log)
@@ -27,6 +34,7 @@ J=$(grep CPU /proc/cpuinfo | wc -l )
 
 L=$(date +%Y-%m-%d-%H-%M-%S.log)
 echo =========== STARTING $L ==========================
+echo =========== GET LLVM  &&  get_fresh_llvm
 echo =========== PULL libFuzzer && (cd Fuzzer; svn up)
 echo =========== UPDATE TRUNK   && update_trunk
 echo =========== SYNC CORPORA and BUILD

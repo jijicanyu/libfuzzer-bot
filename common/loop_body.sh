@@ -59,7 +59,7 @@ case $exit_code in
     ;;
 esac
 echo =========== DUMP COVERAGE
-sancov -strip_path_prefix /sancov/ -not-covered-functions -obj ./${TARGET_NAME}_san_cov_fuzzer $f.*.sancov > notcov
+sancov -strip_path_prefix /sancov/ -not-covered-functions -obj ./${TARGET_NAME}_san_cov_fuzzer *.sancov > notcov
 echo ================== NOT COVERED FUNCTIONS: >> $L
 cat notcov >> $L
 echo =========== UPDATE WEB PAGE

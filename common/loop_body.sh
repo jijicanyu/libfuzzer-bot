@@ -63,7 +63,7 @@ esac
 echo =========== DUMP COVERAGE
 sancov -strip_path_prefix /san_cov/ -not-covered-functions -obj ./${TARGET_NAME}_san_cov_fuzzer *.sancov  | grep -v /usr/include/c++/ > notcov
 echo ================== NOT COVERED FUNCTIONS: >> $L
-cat notcov >> $L
+cat -n notcov >> $L
 echo =========== UPDATE WEB PAGE
 if [ "$DRY_RUN" != "1" ]; then
   mkindex $L

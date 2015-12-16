@@ -16,7 +16,6 @@ for f in Fuzzer/*cpp; do clang++ -std=c++11 -c $f -IFuzzer & done
 wait
 ar ruv libFuzzer.a Fuzzer*.o
 rm -f Fuzzer*.o
-LIMITS="-DSQLITE_PRINTF_PRECISION_LIMIT=100  -DSQLITE_MAX_LENGTH=100000 -DSQLITE_OMIT_PARSER_TRACE -DSQLITE_MAX_SQL_LENGTH=100000"
-clang   -g -fno-omit-frame-pointer -I ${NAME} -DSQLITE_DEBUG  -O2 $SAN $COV -c $NAME/sqlite3.c  $LIMITS             -o sqlite3_$NAME.o
+clang   -g -fno-omit-frame-pointer -I ${NAME} -DSQLITE_DEBUG  -O2 $SAN $COV -c $NAME/sqlite3.c                      -o sqlite3_$NAME.o -DSQLITE_PRINTF_PRECISION_LIMIT=100  -DSQLITE_MAX_LENGTH=100000 -DSQLITE_OMIT_PARSER_TRACE -DSQLITE_MAX_SQL_LENGTH=100000
 clang   -g -fno-omit-frame-pointer -I ${NAME} -DSQLITE_DEBUG  -O2 $SAN $COV -c libfuzzer-bot/sqlite/sqlite_fuzzer.c -o sqlite_fuzzer_$NAME.o
 clang++  -o sqlite_${NAME}_fuzzer $SAN $COV sqlite_fuzzer_$NAME.o sqlite3_$NAME.o libFuzzer.a

@@ -5,10 +5,12 @@
 export PATH="$HOME/llvm-inst/bin:$PATH"
 
 get_fresh_llvm() {
-  mkdir -p llvm-prebuild
-  gsutil rsync gs://libfuzzer-bot-binaries/llvm-prebuild llvm-prebuild
-  rm -rf llvm-inst
-  tar xf llvm-prebuild/llvm-inst.tgz
+  if [ "$DRY_RUN" != "1" ]; then
+    mkdir -p llvm-prebuild
+    gsutil rsync gs://libfuzzer-bot-binaries/llvm-prebuild llvm-prebuild
+    rm -rf llvm-inst
+    tar xf llvm-prebuild/llvm-inst.tgz
+  fi
 }
 
 mkindex() {

@@ -5,7 +5,7 @@ P=$(cd $(dirname $0) && pwd)
 export PATH="$HOME/llvm-inst/bin:$PATH"
 COMMON=$P/../common
 
-MAX_LEN=7000
+MAX_LEN=4000
 MAX_TOTAL_TIME=7200
 BUCKET=gs://sql-fuzzing-corpora
 CORPUS=CORPORA/C1

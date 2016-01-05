@@ -1,7 +1,7 @@
 #!/bin/bash
 # Copyright 2015 Google Inc. All Rights Reserved.
 # Licensed under the Apache License, Version 2.0 (the "License");
-export PATH="$HOME/llvm-build/bin:$PATH"
+export PATH="$HOME/llvm-inst/bin:$PATH"
 NAME=$1 # E.g. asan
 SAN=$2  # E.g. -fsanitize=address
 COV=$3  # E.g. -fsanitize-coverage=edge,8bit-counters

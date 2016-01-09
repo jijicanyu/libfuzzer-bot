@@ -35,7 +35,7 @@ echo =========== PULL HarfBuzz   && (cd harfbuzz; git pull)
 echo =========== SYNC CORPORA and BUILD
 mkdir -p CORPORA/ARTIFACTS
 # These go in parallel.
-(gsutil -m rsync -r $BUCKET/CORPORA CORPORA; gsutil -m rsync -r CORPORA $BUCKET/CORPORA) &
+(gsutil -m rsync -r $BUCKET/CORPORA/C1 CORPORA/C1; gsutil -m rsync -r CORPORA $BUCKET/CORPORA) &
 $P/build.sh asan_cov -fsanitize=address -fsanitize-coverage=edge,8bit-counters > asan_cov_build.log 2>&1 &
 $P/build.sh func -fsanitize=shift -fsanitize-coverage=func > func_build.log 2>&1 &
 wait

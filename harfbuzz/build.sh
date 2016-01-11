@@ -10,7 +10,7 @@ cd $NAME
 ./autogen.sh
 FLAGS=" $SAN $COV -g"
 CXX="clang++ $FLAGS"  CC="clang $FLAGS" CCLD="clang++ $FLAGS" ./configure --enable-static --disable-shared
-make -j
+make -j -C src fuzzing
 )
 ln -sf $HOME/llvm/lib/Fuzzer .
 for f in Fuzzer/*cpp; do clang++ -std=c++11 -c $f -IFuzzer & done

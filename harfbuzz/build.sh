@@ -1,5 +1,5 @@
 #!/bin/bash
-export PATH="$HOME/llvm-build/bin:$PATH"
+export PATH="$HOME/llvm-inst/bin:$PATH"
 NAME=$1 # E.g. asan
 SAN=$2  # E.g. -fsanitize=address
 COV=$3  # E.g. -fsanitize-coverage=edge,8bit-counters

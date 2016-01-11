@@ -9,7 +9,7 @@ COMMON=$P/../common
 BUCKET=gs://font-fuzzing-corpora
 CORPUS=CORPORA/C1
 MAX_LEN=2048
-MAX_TOTAL_TIME=30
+MAX_TOTAL_TIME=7200
 BUILD_SH=$P/build.sh
 
 SAN=-fsanitize=address

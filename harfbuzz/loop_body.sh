@@ -4,6 +4,7 @@
 
 export PATH=$HOME/llvm-inst/bin:$PATH
 P=$(cd $(dirname $0) && pwd)
+COMMON=$P/../common
 
 BUCKET=gs://font-fuzzing-corpora
 CORPUS=CORPORA/C1

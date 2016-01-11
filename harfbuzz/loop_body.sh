@@ -17,7 +17,7 @@ COV=-fsanitize-coverage=edge,8bit-counters
 USE_COUNTERS=1
 
 
-TARGET_NAME=re2
+TARGET_NAME=harfbuzz
 
 update_trunk() {
   if [ -d harfbuzz ]; then

@@ -8,9 +8,6 @@ OLD_PATH=$PATH
 echo ========== BUILDING CLANG ==========
 bash $BASH_FLAGS /src/scripts/build_clang.sh
 
-export CC="/work/llvm/bin/clang"
-export CXX="/work/llvm/bin/clang++"
-export PATH=/work/llvm/bin:$PATH
 export CFLAGS="$CFLAGS $SANITIZER_OPTIONS $COVERAGE_OPTIONS"
 export CXXFLAGS="$CXXFLAGS $SANITIZER_OPTIONS $COVERAGE_OPTIONS"
 

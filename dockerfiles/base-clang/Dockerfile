@@ -10,4 +10,9 @@ RUN cd /src/llvm/projects && git clone --depth 1 http://llvm.org/git/libcxxabi.g
 
 ADD build_clang.sh /src/scripts/
 
+ENV CC="/work/llvm/bin/clang"
+ENV CXX="/work/llvm/bin/clang++"
+ENV PATH="/work/llvm/bin:$PATH"
+ENV LD="/work/llvm/bin/ld.gold"
+
 VOLUME /src/llvm

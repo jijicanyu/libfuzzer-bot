@@ -8,14 +8,14 @@ COMMON=$P/../common
 MAX_LEN=20480
 MAX_TOTAL_TIME=7200
 USE_COUNTERS=1
-BUCKET=gs://font-fuzzing-corpora
-CORPUS=CORPORA/C1
+BUCKET=gs://freetype-fuzzing-corpora
+CORPUS=CORPORA/C2
 ARTIFACTS=CORPORA/ARTIFACTS
 BUILD_SH=$P/build.sh
 
 SAN=-fsanitize=address
 COV=-fsanitize-coverage=edge,8bit-counters
-USE_COUNTERS=1
+USE_COUNTERS=0
 
 TARGET_NAME=freetype2
 

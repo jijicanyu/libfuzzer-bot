@@ -17,7 +17,7 @@ USE_COUNTERS=1
 TARGET_NAME=libxml2
 update_trunk() {
   if [ -d libxml2 ]; then
-    echo # (cd libxml2 && git pull)
+    (cd libxml2 && git pull)
   else
     git clone git://git.gnome.org/libxml2 
   fi

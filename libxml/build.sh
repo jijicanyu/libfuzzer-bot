@@ -15,4 +15,4 @@ make -j
 )
 for f in Fuzzer/*cpp; do clang++ -std=c++11 -c $f -IFuzzer & done
 wait
-clang++ -std=c++11  libfuzzer-bot/libxml/libxml_fuzzer.cc  $SAN $COV  -I $NAME/include $NAME/.libs/libxml2.a Fuzzer*.o -o libxml2_${NAME}_fuzzer  -lz
+clang++ -std=c++11  libfuzzer-bot/libxml/libxml_fuzzer.cc  $SAN $COV  -I $NAME/include $NAME/.libs/libxml2.a Fuzzer*.o -o libxml2_${NAME}_fuzzer  -lz -llzma

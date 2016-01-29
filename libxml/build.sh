@@ -13,7 +13,6 @@ cd $NAME
 CXX="clang++ $SAN $COV" CC="clang $SAN $COV" CCLD="clang++ $SAN $COV" ./configure
 make -j
 )
-ln -sf $HOME/llvm/lib/Fuzzer .
 for f in Fuzzer/*cpp; do clang++ -std=c++11 -c $f -IFuzzer & done
 wait
 clang++ -std=c++11  libfuzzer-bot/libxml/libxml_fuzzer.cc  $SAN $COV  -I $NAME/include $NAME/.libs/libxml2.a Fuzzer*.o -o libxml2_${NAME}_fuzzer  -lz

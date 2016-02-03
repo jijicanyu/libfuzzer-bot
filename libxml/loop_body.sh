@@ -9,7 +9,7 @@ BUCKET=gs://xml-fuzzing-corpora
 CORPUS=CORPORA/C3
 ARTIFACTS=CORPORA/ARTIFACTS
 BUILD_SH=$P/build.sh
-LIBFUZZER_EXTRA_FLAGS="-only_ascii=1 -timeout=30 -dict=libfuzzer-bot/libxml/xml.dict -drill=0"
+LIBFUZZER_EXTRA_FLAGS="-only_ascii=1 -timeout=300 -dict=libfuzzer-bot/libxml/xml.dict -drill=0"
 ASAN_OPTIONS=detect_leaks=0
 SAN=-fsanitize=address
 COV=-fsanitize-coverage=edge,8bit-counters

@@ -14,7 +14,7 @@ BUILD_SH=$P/build.sh
 SAN=-fsanitize=address
 COV=-fsanitize-coverage=edge,8bit-counters
 USE_COUNTERS=1
-LIBFUZZER_EXTRA_FLAGS=-drill=1
+LIBFUZZER_EXTRA_FLAGS=-drill=0
 
 TARGET_NAME=re2
 

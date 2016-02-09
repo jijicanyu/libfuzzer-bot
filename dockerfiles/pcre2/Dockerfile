@@ -8,3 +8,4 @@ ADD pcre2_fuzzer.cc /src/pcre2/
 ENV FUZZERS "/work/pcre2/pcre2_fuzzer"
 
 VOLUME /src/pcre2
+ADD build.sh /src/scripts/

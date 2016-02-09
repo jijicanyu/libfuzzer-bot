@@ -19,6 +19,7 @@ for f in /src/llvm/lib/Fuzzer/*cpp; do
 done
 wait
 
+export LIBFUZZER_OBJS="/work/libfuzzer/*.o"
 mkdir -p /work/logs
 
 echo ========== BUILDING PROJECT ========
@@ -27,4 +28,3 @@ export ASAN_OPTIONS=""
 bash $BASH_FLAGS /src/scripts/build.sh 2>&1 >> /work/logs/build.log
 
 export ASAN_OPTIONS=$OLD_ASAN_OPTIONS
-

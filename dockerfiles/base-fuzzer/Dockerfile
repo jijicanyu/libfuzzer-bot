@@ -2,9 +2,7 @@ FROM libfuzzer/base-clang
 
 MAINTAINER aizatsky@google.com
 
-RUN apt-get install -y gnuplot5-nox gdb
-
-ONBUILD ADD build.sh /src/scripts/
+RUN apt-get install -y gnuplot5-nox 
 
 ENV SANITIZER_OPTIONS="-fsanitize=address"
 ENV COVERAGE_OPTIONS="-fsanitize-coverage=edge,indirect-calls,8bit-counters,trace-cmp"

@@ -13,3 +13,5 @@ ENV FUZZERS "/work/boringssl/fuzzer"
 VOLUME /src/boringssl
 
 RUN mkdir -p /work/boringssl
+
+ADD build.sh /src/scripts/

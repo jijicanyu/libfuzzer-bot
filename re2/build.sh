@@ -9,7 +9,7 @@ COV=$3  # E.g. -fsanitize-coverage=edge,8bit-counters
 rm -rf $NAME
 cp -rf re2 $NAME
 cd $NAME
-make -j CXX="clang++ $SAN $COV" CC="clang -g $SAN $COV" CCLD="clang++ $SAN $COV" CXXFLAGS="-Wall -O1 -g -pthread"
+make -j CXX="clang++ $SAN $COV" CC="clang -g $SAN $COV" CCLD="clang++ $SAN $COV" CXXFLAGS="-Wall -O1 -g -pthread -std=c++11"
 )
 ln -sf $HOME/llvm/lib/Fuzzer .
 for f in Fuzzer/*cpp; do clang++ -std=c++11 -c $f -IFuzzer & done

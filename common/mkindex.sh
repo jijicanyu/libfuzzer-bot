@@ -11,7 +11,10 @@ recent=$(ls -t $@ | head -100)
 mk() {
   echo "<html>"
   for r in $recent; do
-    echo "<a href='"$r"'>"$r"</a><BR>"
+    echo "<a href='"$r"'>"$r"</a>"
+    html=$(echo $r  |sed 's/pass-//g; s/FAIL-//g; s/.log//g').html
+    echo " <a href='$html'>"Coverage"</a>"
+    echo "<BR>"
   done
   echo "</html>"
 }

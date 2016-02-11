@@ -11,7 +11,6 @@ cp -rf re2 $NAME
 cd $NAME
 make -j CXX="clang++ $SAN $COV" CC="clang -g $SAN $COV" CCLD="clang++ $SAN $COV" CXXFLAGS="-Wall -O1 -g -pthread -std=c++11"
 )
-ln -sf $HOME/llvm/lib/Fuzzer .
 for f in Fuzzer/*cpp; do clang++ -std=c++11 -c $f -IFuzzer & done
 wait
 clang++ -std=c++11 $SAN $COV  libfuzzer-bot/re2/re2_fuzzer.cc ./$NAME/obj/libre2.a -I re2/ Fuzzer*.o -o re2_${NAME}_fuzzer

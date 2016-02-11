@@ -14,3 +14,4 @@ We are using seed inputs from the following sources:
 * https://github.com/adobe-fonts
 * https://github.com/Pomax/CFF-glyphlet-fonts
 * https://www.lcdf.org/type/lcdf-typetools-2.105.tar.gz
+* https://github.com/twardoch/test-fonts

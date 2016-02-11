@@ -14,7 +14,8 @@ get_fresh_llvm() {
 }
 
 mkindex() {
-  sudo mv $1 /var/www/html/$prefix-$1
+  sudo mv $1.log /var/www/html/$prefix-$1.log
+  sudo mv $1.html /var/www/html/$1.html
   (cd /var/www/html/; sudo $P/../common/mkindex.sh index.html *log)
 }
 
@@ -34,7 +35,9 @@ dump_coverage() {
 export ASAN_OPTIONS=quarantine_size_mb=10:strip_path_prefix=$HOME/:handle_abort=1:coverage=1:coverage_pcs=1:$ASAN_OPTIONS
 J=$(grep CPU /proc/cpuinfo | wc -l )
 
-L=$(date +%Y-%m-%d-%H-%M-%S.log)
+DATE=$(date +%Y-%m-%d-%H-%M-%S)
+L=$DATE.log
+HTML=$DATE.html
 echo =========== STARTING $L ==========================
 echo =========== GET LLVM  &&  get_fresh_llvm
 echo =========== PULL libFuzzer && (cd Fuzzer; svn up)
@@ -62,11 +65,12 @@ case $exit_code in
 esac
 echo =========== DUMP COVERAGE
 sancov -strip_path_prefix /san_cov/ -not-covered-functions -obj ./${TARGET_NAME}_san_cov_fuzzer *.sancov  | grep -v /usr/include/c++/ > notcov
+sancov  -html-report -obj=./${TARGET_NAME}_san_cov_fuzzer *.sancov > $HTML
 echo ================== NOT COVERED FUNCTIONS: >> $L
 cat -n notcov >> $L
 echo =========== UPDATE WEB PAGE
 if [ "$DRY_RUN" != "1" ]; then
-  mkindex $L
+  mkindex $DATE
 fi
 echo =========== DONE
 echo

@@ -88,7 +88,7 @@ for f in $fuzzers; do
 done
 
 for f in $fuzzers; do
-  sancov -strip_path_prefix /boringssl/ -not-covered-functions -obj build/fuzz/$f $f.*.sancov > $f.notcov
+  sancov -strip_path_prefix /boringssl/ -not-covered-functions build/fuzz/$f $f.*.sancov > $f.notcov
 done
 echo ================== NOT COVERED FUNCTIONS: >> $L
 # Hack!

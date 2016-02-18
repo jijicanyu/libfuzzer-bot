@@ -6,7 +6,7 @@ COMMON=$P/../common
 MAX_LEN=512
 MAX_TOTAL_TIME=3600
 BUCKET=gs://xml-fuzzing-corpora
-CORPUS=CORPORA/C6
+CORPUS=CORPORA/C7
 ARTIFACTS=CORPORA/ARTIFACTS
 BUILD_SH=$P/build.sh
 LIBFUZZER_EXTRA_FLAGS="-only_ascii=1 -timeout=300 -dict=libfuzzer-bot/libxml/xml.dict -drill=0"

@@ -15,6 +15,7 @@ get_fresh_llvm() {
 
 mkindex() {
   sudo mv $1.log /var/www/html/$prefix-$1.log
+  sudo rm /var/www/html/201*.html
   sudo mv $1.html /var/www/html/$1.html
   (cd /var/www/html/; sudo $P/../common/mkindex.sh index.html *log)
 }

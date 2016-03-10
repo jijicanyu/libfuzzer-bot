@@ -12,6 +12,7 @@ ADD build_clang.sh /src/scripts/
 
 ENV CC="/work/llvm/bin/clang"
 ENV CXX="/work/llvm/bin/clang++"
+ENV CCC="/work/llvm/bin/clang++"
 ENV PATH="/work/llvm/bin:$PATH"
 ENV LD="/work/llvm/bin/ld.gold"
 

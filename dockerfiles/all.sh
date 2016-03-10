@@ -5,6 +5,7 @@ docker build $* -t libfuzzer/base base/
 docker build $* -t libfuzzer/base-clang base-clang/
 docker build $* -t libfuzzer/base-fuzzer base-fuzzer/
 
+docker build $* -t libfuzzer/nss nss/
 docker build $* -t libfuzzer/libxml libxml/
 docker build $* -t libfuzzer/pcre2 pcre2/
 docker build $* -t libfuzzer/boringssl boringssl/

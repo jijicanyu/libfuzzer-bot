@@ -1,5 +1,7 @@
 #!/bin/bash
+echo "umask=$(umask)"
 
+umask 022
 . build
 
 echo ========== RUNNING FUZZER ==========
@@ -10,6 +12,7 @@ for F in $FUZZERS; do
   fi
   CORPUS="/work/corpuses/$(basename $F)"
   mkdir -p $CORPUS
+  cd $(dirname $F)
   FUZZER_ADDITIONAL_OPTIONS="$FUZZER_ADDITIONAL_OPTIONS $CORPUS"
-  $F $FUZZER_OPTIONS $FUZZER_ADDITIONAL_OPTIONS
+  env ASAN_OPTIONS=$ASAN_OPTIONS $F $FUZZER_OPTIONS $FUZZER_ADDITIONAL_OPTIONS
 done

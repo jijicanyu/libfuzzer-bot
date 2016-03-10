@@ -1,5 +1,6 @@
 #!/bin/bash
 
+umask 022
 . build
 
 echo ========== BENCHMARKING FUZZER ==========
@@ -8,7 +9,6 @@ export FUZZER_OPTIONS="$FUZZER_OPTIONS -output_csv=1 -verbosity=0"
 
 echo "FUZZER_OPTIONS=$FUZZER_OPTIONS"
 echo "ASAN_OPTIONS=$ASAN_OPTIONS"
-echo "umask=$(umask)"
 
 cd /work
 
@@ -39,4 +39,3 @@ for F in $FUZZERS; do
 
   echo "Report generated to $report_file ($unique_report_file)"
 done
-

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -x -e
+
+export CC="/work/llvm/bin/clang"
+export CXX="/work/llvm/bin/clang++"
+export CCC="/work/llvm/bin/clang++"
+export PATH="/work/llvm/bin:$PATH"
+
+export CFLAGS="$sanitizer_flags $cov_flags"

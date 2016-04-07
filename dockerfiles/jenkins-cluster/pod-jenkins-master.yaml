@@ -1,0 +1,30 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: jenkins-master
+  labels:
+    app: jenkins-master
+spec:
+  containers:
+  - name: jenkins-master
+    image: gcr.io/meta-iterator-105109/jenkins
+    env:
+      - name: KUB_POD_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: KUB_POD_IP
+        valueFrom:
+          fieldRef:
+            fieldPath: status.podIP
+    ports:
+    - containerPort: 8080
+    - containerPort: 50000
+    volumeMounts:
+    - name: jenkins-work
+      mountPath: "/var/jenkins_home"
+  volumes:
+  - name: jenkins-work
+    gcePersistentDisk:
+      pdName: jenkins-work
+      fsType: ext4

@@ -1,0 +1,51 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: jenkins-master
+
+spec:
+  replicas: 1
+  selector:
+    app: jenkins-master
+  template:
+    metadata:
+      name: jenkins-master
+      labels:
+        app: jenkins-master
+    spec:
+      containers:
+      - name: jenkins-master
+        image: gcr.io/meta-iterator-105109/jenkins
+        env:
+          - name: KUB_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: KUB_POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          - name: JAVA_OPTS
+            value: "-Duser.timezone=America/Los_Angeles"
+        ports:
+        - containerPort: 8080
+        - containerPort: 50000
+        volumeMounts:
+        - name: jenkins-work
+          mountPath: "/var/jenkins_home"
+        livenessProbe:
+          httpGet:
+            path: "/login"
+            port: 8080
+          initialDelaySeconds: 60
+          timeoutSeconds: 15
+        resources:
+          requests:
+            memory: "4Gi"
+        securityContext:
+          privileged: true
+      volumes:
+      - name: jenkins-work
+        gcePersistentDisk:
+          pdName: jenkins-work
+          fsType: ext4

@@ -1,0 +1,36 @@
+At least one -url option is required.
+java -jar slave.jar [options...] <secret key> <slave name>
+ -credentials USER:PASSWORD      : HTTP BASIC AUTH header to pass in for making
+                                   HTTP requests.
+ -headless                       : Run in headless mode, without GUI
+ -jar-cache DIR                  : Cache directory that stores jar files sent
+                                   from the master
+ -noreconnect                    : If the connection ends, don't retry and just
+                                   exit.
+ -proxyCredentials USER:PASSWORD : HTTP BASIC AUTH header to pass in for making
+                                   HTTP authenticated proxy requests.
+ -tunnel HOST:PORT               : Connect to the specified host and port,
+                                   instead of connecting directly to Jenkins.
+                                   Useful when connection to Hudson needs to be
+                                   tunneled. Can be also HOST: or :PORT, in
+                                   which case the missing portion will be
+                                   auto-configured like the default behavior
+ -url URL                        : Specify the Jenkins root URLs to connect to.
+At least one -url option is required.
+java -jar slave.jar [options...] <secret key> <slave name>
+ -credentials USER:PASSWORD      : HTTP BASIC AUTH header to pass in for making
+                                   HTTP requests.
+ -headless                       : Run in headless mode, without GUI
+ -jar-cache DIR                  : Cache directory that stores jar files sent
+                                   from the master
+ -noreconnect                    : If the connection ends, don't retry and just
+                                   exit.
+ -proxyCredentials USER:PASSWORD : HTTP BASIC AUTH header to pass in for making
+                                   HTTP authenticated proxy requests.
+ -tunnel HOST:PORT               : Connect to the specified host and port,
+                                   instead of connecting directly to Jenkins.
+                                   Useful when connection to Hudson needs to be
+                                   tunneled. Can be also HOST: or :PORT, in
+                                   which case the missing portion will be
+                                   auto-configured like the default behavior
+ -url URL                        : Specify the Jenkins root URLs to connect to.

@@ -7,4 +7,6 @@ export CXX="/work/llvm/bin/clang++"
 export CCC="/work/llvm/bin/clang++"
 export PATH="/work/llvm/bin:$PATH"
 
-export CFLAGS="$sanitizer_flags $cov_flags"
+export CFLAGS="-g $sanitizer_flags $cov_flags"
+export LIBCXX_FLAGS="-stdlib=libc++ -lc++ -lc++abi -lm -lc -lgcc_s -lgcc"
+export CXXFLAGS="-std=c++11 $CFLAGS $LIBCXX_FLAGS "

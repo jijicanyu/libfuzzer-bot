@@ -1,21 +1,15 @@
 #!/bin/bash
 set -e
 
-cd /src/freetype2/
-if [ ! -f configure.ac ]
-then
-  ./autogen.sh
-fi
+. /work/llvm/env
 
-mkdir -p /work/freetype2
-cd /work/freetype2
-echo =========== CONFIGURE
-bash /src/freetype2/configure
+./autogen.sh
+./configure
+make
 
-echo =========== MAKE
-make -j 16
-
-$CXX $CXXFLAGS -std=c++11 /src/freetype2/src/tools/ftfuzzer/ftfuzzer.cc \
-  *.o /work/libfuzzer/*.o \
-  -larchive -I /src/freetype2/include -I . .libs/libfreetype.a  \
-   -o freetype2_fuzzer
+$CXX $CXXFLAGS -std=c++11 ./src/tools/ftfuzzer/ftfuzzer.cc \
+   -nodefaultlibs -Wl,-Bdynamic -lpthread -lrt -lm -ldl -lgcc_s -lgcc -lc -lgcc_s -lgcc \
+   -Wl,-Bstatic -lc++ -lc++abi \
+  ./objs/*.o /work/libfuzzer/*.o \
+  -larchive -I./include -I. ./objs/.libs/libfreetype.a  \
+   -o /out/freetype2_fuzzer

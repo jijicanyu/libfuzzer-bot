@@ -2,27 +2,16 @@ FROM libfuzzer/base-clang
 
 MAINTAINER aizatsky@google.com
 
-RUN apt-get install -y gnuplot5-nox
+RUN mkdir /workspace
+WORKDIR /workspace
+VOLUME /workspace
 
-ENV SANITIZER_OPTIONS="-fsanitize=address"
-ENV COVERAGE_OPTIONS="-fsanitize-coverage=edge,indirect-calls,8bit-counters,trace-cmp"
-ENV CFLAGS="-g"
-ENV CXXFLAGS="-g"
+RUN mkdir -p /work/libfuzzer
 
-ENV BASH_FLAGS="-e"
+ENV sanitizer_flags="-fsanitize=address"
+ENV cov_flags="-fsanitize-coverage=edge,indirect-calls,8bit-counters"
 
-ENV FUZZER_OPTIONS="-use_traces=1"
-# detect_leaks - by default ptrace doesn't work within container. Use:
-#                --cap-add SYS_PTRACE --security-opt apparmor:unconfined
-#                arguments for docker run to enable it.
-# quarantine_size_mb - make asan less memory hungry
-ENV ASAN_OPTIONS="detect_leaks=0:quarantine_size_mb=10:symbolize=1:abort_on_error=1:handle_abort=1"
-ENV PATH="/src/scripts:$PATH"
+ENV ASAN_OPTIONS="symbolize=1"
 
-WORKDIR /src/scripts/
-CMD bash $BASH_FLAGS /src/scripts/all
-
-ADD all /src/scripts/
-ADD benchmark /src/scripts/
-ADD build /src/scripts/
-ADD plot.gp /src/scripts/
+RUN mkdir /out
+VOLUME /out

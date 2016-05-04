@@ -3,7 +3,7 @@ set -e
 
 . /work/llvm/env
 
-cd freetype2
+cd /workspace/freetype2
 
 ./autogen.sh
 ./configure

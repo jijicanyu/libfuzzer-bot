@@ -3,6 +3,8 @@ set -e
 
 . /work/llvm/env
 
+cd freetype2
+
 ./autogen.sh
 ./configure
 make

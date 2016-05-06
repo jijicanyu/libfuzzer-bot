@@ -1,6 +1,6 @@
 # Workspace should contain directories:
 # - libfuzzer-bot (checkout of https://github.com/google/libfuzzer-bot/)
-# - freetype2 (checkout of )
+# - freetype2 (checkout of git://git.sv.nongnu.org/freetype/freetype2.git)
 FROM libfuzzer/base-fuzzer
 MAINTAINER aizatsky@google.com
 

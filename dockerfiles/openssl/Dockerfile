@@ -9,4 +9,4 @@ MAINTAINER aizatsky@google.com
 RUN apt-get install -y autoconf libtool libarchive-dev
 
 ADD libfuzzer-bot/dockerfiles/openssl/build.sh /src/
-CMD /src/scripts/build.sh
+CMD /src/build.sh

@@ -7,7 +7,7 @@ cd openssl
 ./config $CXXFLAGS
 make -j
 
-files=$(find ${WORKSPACE}/benlaurie-openssl/fuzz/ -name "*.c" ! -name "reproduce.c")
+files=$(find ./fuzz/ -name "*.c" ! -name "reproduce.c")
 FUZZERS=()
 
 find . -name "*.a"

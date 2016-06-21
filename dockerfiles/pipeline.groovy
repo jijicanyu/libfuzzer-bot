@@ -1,5 +1,3 @@
-def SANITIZERS = ["address", "memory"]
-
 def call(body) {
     // evaluate the body block, and collect configuration into the object
     def config = [:]
@@ -13,15 +11,15 @@ def call(body) {
 
     // Optional configuration
     def projectName = config["name"] ?: env.JOB_BASE_NAME
-    def sanitizers = config["sanitizers"] ?: SANITIZERS
+    def sanitizers = config["sanitizers"] ?: ["address", "memory"]
 
     node {
       echo "Config: ${config}"
 
       echo "Building project ${projectName} with Dockerfile=${dockerfile}"
 
-      for (int i = 0; i < SANITIZERS.size(); i++) {
-        def sanitizer = SANITIZERS[i]
+      for (int i = 0; i < sanitizers.size(); i++) {
+        def sanitizer = sanitizers[i]
         def docker_tag = "${projectName}-${sanitizer}"
 
         dir(sanitizer) {

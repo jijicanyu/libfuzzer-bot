@@ -1,5 +1,11 @@
-def sayHello(str) {
-  node {
-    echo "Hello ${str}"
-  }
+def call(body) {
+    // evaluate the body block, and collect configuration into the object
+    def config = [:]
+    body.resolveStrategy = Closure.DELEGATE_FIRST
+    body.delegate = config
+    body()
+
+    node {
+      echo "Config: ${config}"
+    }
 }

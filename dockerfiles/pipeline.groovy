@@ -14,6 +14,7 @@ def call(body) {
     // Optional configuration
     def projectName = config["name"] ?: env.JOB_BASE_NAME
     def sanitizers = config["sanitizers"] ?: ["address", "memory"]
+    def checkoutDir = config["checkoutDir"] ?: projectName
 
     def date = java.time.format.DateTimeFormatter.ofPattern("yyyyMMddHHmm").format(java.time.LocalDateTime.now())
 
@@ -35,7 +36,7 @@ def call(body) {
           dir('libfuzzer-bot') {
               git url: 'https://github.com/google/libfuzzer-bot/'
           }
-          dir(projectName) {
+          dir(checkoutDir) {
               git url: gitUrl
           }
 

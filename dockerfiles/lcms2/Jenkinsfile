@@ -1,0 +1,9 @@
+
+def libfuzzerBuild = fileLoader.fromGit('dockerfiles/pipeline.groovy',
+        'https://github.com/google/libfuzzer-bot.git', 'master', null, '')
+
+libfuzzerBuild {
+  git = "https://github.com/mm2/Little-CMS.git"
+  checkoutDir = "Little-CMS"
+  dockerfile = "libfuzzer-bot/dockerfiles/lcms2/Dockerfile"
+}

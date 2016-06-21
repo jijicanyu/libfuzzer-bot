@@ -42,7 +42,7 @@ def call(body) {
           sh "docker build -t libfuzzer/$dockerTag -f $dockerfile ."
 
           sh "rm -rf $out"
-          def zipFile= "$dockerTag-$date.zip"
+          def zipFile= "$dockerTag-${date}.zip"
 
           sh "mkdir -p $out"
           sh "docker run -v $workspace:/workspace -v $out:/out -e sanitizer_flags=\"-fsanitize=$sanitizer\" -t libfuzzer/$dockerTag"

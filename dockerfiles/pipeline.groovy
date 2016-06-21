@@ -5,8 +5,10 @@ def call(body) {
     body.delegate = config
     body()
 
-    def projectName = config.get("name", env.JOB_BASE_NAME)
-    def dockerfile = config.get("dockerfile")
+    def projectName = config["name"] ?: env.JOB_BASE_NAME
+    def dockerfile = config["dockerfile"]
+
+    assert dockerfile : "dockerfile should be specified"
 
     node {
       echo "Config: ${config}"

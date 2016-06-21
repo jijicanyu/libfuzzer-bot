@@ -10,6 +10,7 @@ builder {
     str = "from ${PROJECT_NAME}"
 }
 
+/*
 node {
   echo "Building project ${PROJECT_NAME} with Dockerfile=${DOCKERFILE}"
 
@@ -45,3 +46,4 @@ node {
   }
   echo 'Done'
 }
+*/

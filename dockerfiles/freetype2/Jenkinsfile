@@ -1,41 +1,8 @@
-def PROJECT_NAME=env.JOB_BASE_NAME
 
-def DATE = java.time.format.DateTimeFormatter.ofPattern("yyyyMMddHHmm").format(java.time.LocalDateTime.now())
-
-def builder = fileLoader.fromGit('dockerfiles/pipeline.groovy',
+def libfuzzerBuild = fileLoader.fromGit('dockerfiles/pipeline.groovy',
         'https://github.com/google/libfuzzer-bot.git', 'master', null, '')
-builder {
+
+libfuzzerBuild {
+  git = "git://git.sv.nongnu.org/freetype/freetype2.git"
   dockerfile = "libfuzzer-bot/dockerfiles/freetype2/Dockerfile"
 }
-
-/*
-node {
-    dir(sanitizer) {
-      echo "*** Building with ${sanitizer} sanitizer"
-
-      // See JENKINS-33511
-      sh 'pwd > pwd.current'
-      def WORKSPACE = readFile('pwd.current').trim()
-      def out = "${WORKSPACE}/out"
-
-      dir('libfuzzer-bot') {
-          git url: 'https://github.com/google/libfuzzer-bot/'
-      }
-      dir('freetype2') {
-          git url: 'git://git.sv.nongnu.org/freetype/freetype2.git'
-      }
-
-      sh "docker build -t libfuzzer/${docker_tag} -f ${DOCKERFILE} ."
-
-      sh "rm -rf ${out}"
-      def ZIP= "${docker_tag}-${DATE}.zip"
-
-      sh "mkdir -p $out"
-      sh "docker run -v ${WORKSPACE}:/workspace -v ${out}:/out -e sanitizer_flags=\"-fsanitize=${sanitizer}\" -t libfuzzer/${docker_tag}"
-      sh "zip -j ${ZIP} ${out}/*"
-      sh "gsutil cp $ZIP gs://clusterfuzz-builds/$PROJECT_NAME/"
-    }
-  }
-  echo 'Done'
-}
-*/

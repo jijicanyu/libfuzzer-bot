@@ -9,3 +9,5 @@ def call(body) {
       echo "Config: ${config}"
     }
 }
+
+return this;

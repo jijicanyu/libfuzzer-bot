@@ -1,23 +1,15 @@
 def PROJECT_NAME=env.JOB_BASE_NAME
 
-def SANITIZERS = ["address", "memory"]
-def DOCKERFILE="libfuzzer-bot/dockerfiles/$PROJECT_NAME/Dockerfile"
 def DATE = java.time.format.DateTimeFormatter.ofPattern("yyyyMMddHHmm").format(java.time.LocalDateTime.now())
 
 def builder = fileLoader.fromGit('dockerfiles/pipeline.groovy',
         'https://github.com/google/libfuzzer-bot.git', 'master', null, '')
 builder {
-    str = "from ${PROJECT_NAME}"
+  dockerfile = "libfuzzer-bot/dockerfiles/freetype2/Dockerfile"
 }
 
 /*
 node {
-  echo "Building project ${PROJECT_NAME} with Dockerfile=${DOCKERFILE}"
-
-  for (int i = 0; i < SANITIZERS.size(); i++) {
-    def sanitizer = SANITIZERS[i]
-    def docker_tag = "${PROJECT_NAME}-${sanitizer}"
-
     dir(sanitizer) {
       echo "*** Building with ${sanitizer} sanitizer"
 

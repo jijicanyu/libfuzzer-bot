@@ -4,6 +4,10 @@ def SANITIZERS = ["address", "memory"]
 def DOCKERFILE="libfuzzer-bot/dockerfiles/$PROJECT_NAME/Dockerfile"
 def DATE = java.time.format.DateTimeFormatter.ofPattern("yyyyMMddHHmm").format(java.time.LocalDateTime.now())
 
+def builder = fileLoader.fromGit('dockerfiles/pipeline.groovy',
+        'https://github.com/google/libfuzzer-bot.git', 'master', null, '')
+builder.sayHello("from ${PROJECT_NAME}")
+
 node {
   echo "Building project ${PROJECT_NAME} with Dockerfile=${DOCKERFILE}"
 

@@ -4,5 +4,5 @@ def libfuzzerBuild = fileLoader.fromGit('dockerfiles/pipeline.groovy',
 
 libfuzzerBuild {
   git = "https://github.com/openssl/openssl"
-  dockerfile = "libfuzzer-bot/dockerfiles/libarchive/Dockerfile"
+  dockerfile = "libfuzzer-bot/dockerfiles/openssl/Dockerfile"
 }

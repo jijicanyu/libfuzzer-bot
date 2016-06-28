@@ -18,15 +18,19 @@
 
 set -e
 
-cd /src/libxml2/
-if [ ! -f configure ]
-then
-  ./autogen.sh
-fi
+. /work/llvm/env
 
+cd libxml2
+
+./autogen.sh
 echo =========== MAKE
 make -j 16
 
-$CXX $CXXFLAGS -std=c++11 libxml2_fuzzer.cc \
-  -Iinclude -L.libs -lxml2 -llzma $LIBFUZZER_OBJS \
-   -o /work/libxml2/libxml2_fuzzer
+$CXX $CXXFLAGS -std=c++11 /workspace/libfuzzer-bot/dockerfiles/libxml2/libxml2_read_memory_fuzzer.cc \
+  /work/libfuzzer/*.o -Iinclude ./.libs/libxml2.a \
+  -nodefaultlibs -Wl,-Bdynamic -lpthread -lrt -lm -ldl -lgcc_s -lgcc -lc \
+  -Wl,-Bstatic -lc++ -lc++abi -llzma \
+  -o /out/libxml2_read_memory_fuzzer
+
+cp /workspace/libfuzzer-bot/dockerfiles/libxml2/*.{dict,options} /out
+chmod +r /out/*

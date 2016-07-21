@@ -26,7 +26,37 @@ RUN cd /src/nss && hg clone https://hg.mozilla.org/projects/nspr
 RUN cd /src/nss && hg clone https://hg.mozilla.org/projects/nss
 VOLUME /src/nss
 
-ENV FUZZERS "/work/nss/asn1_bitstring_fuzzer"
-ADD asn1_bitstring_fuzzer.cc /src/nss/
+ENV FUZZERS "/work/nss/asn1_algorithmid_fuzzer \
+  /work/nss/asn1_any_fuzzer \
+  /work/nss/asn1_bitstring_fuzzer \
+  /work/nss/asn1_bmpstring_fuzzer \
+  /work/nss/asn1_boolean_fuzzer \
+  /work/nss/asn1_generalizedtime_fuzzer \
+  /work/nss/asn1_ia5string_fuzzer \
+  /work/nss/asn1_integer_fuzzer \
+  /work/nss/asn1_null_fuzzer \
+  /work/nss/asn1_objectid_fuzzer \
+  /work/nss/asn1_octetstring_fuzzer \
+  /work/nss/asn1_utctime_fuzzer \
+  /work/nss/asn1_utf8string_fuzzer \
+  /work/nss/cert_certificate_fuzzer \
+  /work/nss/seckey_privatekeyinfo_fuzzer"
+
+ADD fuzzers/asn1_algorithmid_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_any_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_bitstring_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_bmpstring_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_boolean_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_fuzzer_template.h /src/nss/
+ADD fuzzers/asn1_generalizedtime_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_ia5string_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_integer_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_null_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_objectid_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_octetstring_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_utctime_fuzzer.cc /src/nss/
+ADD fuzzers/asn1_utf8string_fuzzer.cc /src/nss/
+ADD fuzzers/cert_certificate_fuzzer.cc /src/nss/
+ADD fuzzers/seckey_privatekeyinfo_fuzzer.cc /src/nss/
 
 ADD build.sh /src/scripts/

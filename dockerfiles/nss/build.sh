@@ -33,11 +33,14 @@ cp -rL Linux*/include/* /work/nss/include
 cp -rL {public,private}/nss/* /work/nss/include
 
 # -Iinclude -L.libs -lxml2 -llzma \
-$CXX $CXXFLAGS -std=c++11 /src/nss/asn1_bitstring_fuzzer.cc \
-   -I/work/nss/include \
-   -lnss3 -lnssutil3 -lnspr4 -lplc4 -lplds4 \
-    $LIBFUZZER_OBJS \
-   -o /work/nss/asn1_bitstring_fuzzer
+for fuzzer in $FUZZERS; do
+  fuzzer_name=$(basename $fuzzer)
+  $CXX $CXXFLAGS -std=c++11 /src/nss/$fuzzer_name.cc \
+     -I/work/nss/include \
+     -lnss3 -lnssutil3 -lnspr4 -lplc4 -lplds4 \
+      $LIBFUZZER_OBJS \
+     -o $fuzzer
+done
 
 export LD_LIBRARY_PATH=/work/nss/lib:$LD_LIBRARY_PATH
 

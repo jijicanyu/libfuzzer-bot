@@ -6,7 +6,7 @@ export PATH="$HOME/llvm-inst/bin:$PATH"
 COMMON=$P/../common
 
 MAX_LEN=21480
-MAX_TOTAL_TIME=36000
+MAX_TOTAL_TIME=7200
 USE_COUNTERS=1
 BUCKET=gs://freetype-fuzzing-corpora
 CORPUS=CORPORA/C2

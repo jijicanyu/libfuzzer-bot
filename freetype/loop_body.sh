@@ -14,8 +14,9 @@ ARTIFACTS=CORPORA/ARTIFACTS
 BUILD_SH=$P/build.sh
 
 SAN=-fsanitize=address
-COV=-fsanitize-coverage=edge,8bit-counters
+COV=-fsanitize-coverage=edge,8bit-counters,trace-cmp
 USE_COUNTERS=0
+LIBFUZZER_EXTRA_FLAGS=-use_value_profile=1
 
 TARGET_NAME=freetype2
 

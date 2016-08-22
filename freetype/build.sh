@@ -17,7 +17,7 @@ COV=$3  # E.g. -fsanitize-coverage=edge,8bit-counters
   make -j
 )
 
-for f in Fuzzer/*cpp; do clang++ -std=c++11 -c $f -IFuzzer & done
+for f in Fuzzer/*cpp; do clang++ -O2 -std=c++11 -c $f -IFuzzer & done
 wait
 
 clang++ -std=c++11  $NAME/src/tools/ftfuzzer/ftfuzzer.cc \

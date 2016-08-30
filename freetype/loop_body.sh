@@ -15,8 +15,8 @@ BUILD_SH=$P/build.sh
 
 SAN=-fsanitize=address
 COV=-fsanitize-coverage=edge,8bit-counters,trace-cmp
-USE_COUNTERS=0
-LIBFUZZER_EXTRA_FLAGS=-use_value_profile=1
+USE_COUNTERS=1
+LIBFUZZER_EXTRA_FLAGS="-use_value_profile=1 -rss_limit_mb=3200"
 
 TARGET_NAME=freetype2
 

@@ -13,7 +13,7 @@ CORPUS=CORPORA/C2
 ARTIFACTS=CORPORA/ARTIFACTS
 BUILD_SH=$P/build.sh
 
-SAN=-fsanitize=address
+SAN=-fsanitize=bool
 COV=-fsanitize-coverage=edge,8bit-counters,trace-cmp
 LIBFUZZER_EXTRA_FLAGS="-use_value_profile=1 -rss_limit_mb=3200 -print_pcs=1"
 

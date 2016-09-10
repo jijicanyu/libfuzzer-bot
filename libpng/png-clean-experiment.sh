@@ -12,15 +12,19 @@ exttract_libpng() {
 build_libpng() {
   rm -rf build
   mkdir build
+  (
   cd build
   ../libpng-1.2.56/configure CC="clang -fsanitize=bool -fsanitize-coverage=edge,8bit-counters,trace-cmp" CFLAGS="-O1 -g -fno-omit-frame-pointer"
   make -j
+  )
+}
+
+get_libfuzzer() {
+  [ ! -e Fuzzer ] && git clone https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer
 }
 
 build_libfuzzer() {
-  git clone https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer
-  clang++ -c -g -O2 -std=c++11 Fuzzer/*.cpp -IFuzzer
-  ar ruv libFuzzer.a Fuzzer*.o
+  [ ! -e libFuzzer.a ] && clang++ -c -g -O2 -std=c++11 Fuzzer/*.cpp -IFuzzer && ar ruv libFuzzer.a Fuzzer*.o
 }
 
 create_target() {
@@ -178,6 +182,7 @@ run_A_B() {
 
 
 
+get_libfuzzer
 build_libfuzzer
 get_libpng
 exttract_libpng

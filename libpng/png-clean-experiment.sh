@@ -164,7 +164,7 @@ EOF
 }
 
 build_target() {
-  clang++ -g -std=c++11 -fsanitize=address -fsanitize-coverage=edge png_read_fuzzer.cc build/.libs/libpng12.a libFuzzer.a  -I libpng-1.2.56/ -I build -lz -o vanilla-png
+  clang++ -g -std=c++11 -fsanitize=bool -fsanitize-coverage=edge png_read_fuzzer.cc build/.libs/libpng12.a libFuzzer.a  -I libpng-1.2.56/ -I build -lz -o vanilla-png
 }
 
 run_A_B() {
@@ -175,8 +175,8 @@ run_A_B() {
     rm -rf T$VP
     mkdir T$VP
     mkdir T$VP/C
-    # cp ../seed.png C  # comment this out to start from empty seed.
-    (cd T$VP; ../vanilla-png C -close_fd_mask=3 -jobs=10 -max_total_time=600 -use_value_profile=$VP) &
+    cp seed.png T$VP/C  # comment this out to start from empty seed.
+    (cd T$VP; ../vanilla-png C -close_fd_mask=3 -jobs=10 -max_total_time=60000 -use_value_profile=$VP) &
   done
   # wait
 }

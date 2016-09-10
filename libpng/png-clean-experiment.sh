@@ -10,9 +10,9 @@ exttract_libpng() {
 }
 
 build_libpng() {
+  [ ! -e build/.libs/libpng12.a ] && (
   rm -rf build
   mkdir build
-  (
   cd build
   ../libpng-1.2.56/configure CC="clang -fsanitize=bool -fsanitize-coverage=edge,8bit-counters,trace-cmp" CFLAGS="-O1 -g -fno-omit-frame-pointer"
   make -j
@@ -169,12 +169,13 @@ build_target() {
 
 run_A_B() {
   # create seed.
-  convert -background white -size 80x label:"X" -trim +repage seed.png
+  #convert -background white -size 80x label:"X" -trim +repage seed.png
+  echo iVBORw0KGgoAAAANSUhEUgAAAAIAAAACEAIAAACtREYwAAAACXBIWXMAAABIAAAASABGyWs+AAAACXZwQWcAAAACAAAAAgBqLH6AAAAAI0lEQVQI12PkFKjdx8DA8JvhBwMDE8thjk8MDGx2f34zMAAAWQIHRw9wZBoAAAAASUVORK5CYII= | base64 -d > seed.png
   for VP in 0 1; do
     rm -rf T$VP
     mkdir T$VP
     mkdir T$VP/C
-    cp ../seed.png C  # comment this out to start from empty seed.
+    # cp ../seed.png C  # comment this out to start from empty seed.
     (cd T$VP; ../vanilla-png C -close_fd_mask=3 -jobs=10 -max_total_time=600 -use_value_profile=$VP) &
   done
   # wait

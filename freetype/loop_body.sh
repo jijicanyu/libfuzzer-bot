@@ -9,13 +9,13 @@ MAX_LEN=21480
 MAX_TOTAL_TIME=7200
 USE_COUNTERS=0
 BUCKET=gs://freetype-fuzzing-corpora
-CORPUS=CORPORA/C2
+CORPUS=CORPORA/C3
 ARTIFACTS=CORPORA/ARTIFACTS
 BUILD_SH=$P/build.sh
 
 SAN=-fsanitize=address
 COV=-fsanitize-coverage=edge,8bit-counters,trace-cmp
-LIBFUZZER_EXTRA_FLAGS="-use_value_profile=1 -rss_limit_mb=3200 -print_pcs=1"
+LIBFUZZER_EXTRA_FLAGS="-use_value_profile=0 -rss_limit_mb=3200 -print_pcs=1"
 
 TARGET_NAME=freetype2
 

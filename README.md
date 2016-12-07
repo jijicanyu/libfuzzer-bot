@@ -1,3 +1,8 @@
+**THIS PROJECT IS DEPRECATED AND WILL BE DELETED SOON**
+
+**For the new version see https://github.com/google/oss-fuzz**
+
+
 # libfuzzer-bot
 
 Fuzzing bots for opensource projects
